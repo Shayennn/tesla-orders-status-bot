@@ -74,7 +74,8 @@ if diffs:
             msg += f"Remove: {change_pos}\n"
         change_msg += [msg]
 
-    out_msg = f'There is a change in order status\n{"*"*10}\n\n'.join(change_msg)
+    out_msg = "There is a change in order status"
+    out_msg += f'\n{"*"*10}\n\n'.join(change_msg)
     print(out_msg)
     notify(out_msg, line_token)
 else:
