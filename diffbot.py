@@ -1,11 +1,15 @@
 import json
+import logging
 import os
 from datetime import datetime
 
 from dictdiffer import diff
 from dotenv import load_dotenv
+from logger import setup_logger
 
 from utils import get_new_token, get_order_status, notify
+
+logger = setup_logger(__name__, logging.DEBUG)
 
 load_dotenv()
 
@@ -16,10 +20,14 @@ tesla_refresh_token = os.getenv("TESLA_REFRESH_TOKEN")
 
 # test get_new_token
 
-new_token = get_new_token(tesla_token, tesla_refresh_token)
+try:
+    new_token = get_new_token(tesla_token, tesla_refresh_token)
+except Exception as e:
+    logger.error(e)
+    raise e
 
 if new_token["access_token"] != tesla_token:
-    print("New token is generated")
+    logger.debug("New token is generated")
 
     # save new token to .env
     with open(".env", "w") as f:
@@ -52,7 +60,7 @@ diffs = list(diff(old_status, new_status))
 # Notify if there is any change
 
 if diffs:
-    print(diffs)
+    logger.debug(diffs)
 
     change_msg = []
     for change in diffs:
@@ -76,10 +84,10 @@ if diffs:
 
     out_msg = "There is a change in order status\n\n"
     out_msg += f'\n{"*"*10}\n\n'.join(change_msg)
-    print(out_msg)
+    logger.info(out_msg)
     notify(out_msg, line_token)
 else:
-    print("No change")
+    logger.info("No change")
 
 # save new status to data/status.json
 with open("data/status.json", "w") as f:
