@@ -23,6 +23,7 @@ tesla_refresh_token = os.getenv("TESLA_REFRESH_TOKEN")
 try:
     new_token = get_new_token(tesla_token, tesla_refresh_token)
 except Exception as e:
+    notify(f"Error in get_new_token \n\n{e}", line_token)
     logger.error(e)
     raise e
 
