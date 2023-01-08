@@ -36,6 +36,8 @@ def get_new_token(token, refresh_token):
             "access_token": token,
             "refresh_token": refresh_token,
         }
+    if is_token_expired(refresh_token):
+        raise ValueError("Refresh token is expired")
     url = "https://auth.tesla.com/oauth2/v3/token"
     payload = {
         "grant_type": "refresh_token",
