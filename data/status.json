@@ -1,0 +1,17 @@
+{
+  "response": [
+    {
+      "vehicleMapId": "-",
+      "referenceNumber": "-",
+      "vin": "-",
+      "orderStatus": "-",
+      "orderSubstatus": "-",
+      "modelCode": "-",
+      "countryCode": "-",
+      "locale": "-",
+      "mktOptions": "-",
+      "isB2b": "-"
+    }
+  ],
+  "count": 1
+}
