@@ -1,4 +1,4 @@
-requests==2.28.2
+requests==2.29.0
 deepdiff==6.2.3
 pyjwt==2.6.0
 python-dotenv==0.21.1
